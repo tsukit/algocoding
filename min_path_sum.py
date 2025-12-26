@@ -11,8 +11,7 @@
 # this is an implementation of minimum path sum. the way it works is based on a
 # simple observation:
 #
-# 	current_min_path_sum = (current_value +
-# 												 min(left_min_path_sum, above_min_path_sum))
+# 	current_min_path_sum = current_value + min(left_min_path_sum, above_min_path_sum)
 #
 # we use dynamic programming technique to avoid computing the same value
 # multiple times. time complexity of this implementation is O(row x col)
