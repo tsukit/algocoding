@@ -45,7 +45,7 @@ def game_of_life(grid, gen):
         ])
         cur_alive = grid[row][col]
         if cur_alive:
-            return (live_neighbors_cnt >= 2 and live_neighbors_cnt <= 3)
+            return 2 <= live_neighbors_cnt <= 3
         else:
             return live_neighbors_cnt == 3
 
@@ -69,6 +69,7 @@ def test(grid, gen):
 
 
 # grid = generate_grid(5, 5)
-grid = [[0, 1, 0], [0, 0, 1], [1, 1, 1], [0, 0, 0]]
-test(grid, 1)
+
+test([[0, 1, 0], [0, 0, 1], [1, 1, 1], [0, 0, 0]], 1)
+test([[1,1],[1,0]], 1)
 
