@@ -25,26 +25,50 @@ def game_of_life(grid, gen):
     cols = len(grid[0])
 
     def apply_rules(row, col):
-        pass
+        live_neighbors_cnt = sum([
+            # top-left
+            grid[row - 1][col - 1] if row > 0 and col > 0 else 0,
+            # above
+            grid[row - 1][col] if row > 0 else 0,
+            # top-right
+            grid[row - 1][col + 1] if row > 0 and col < cols - 1 else 0,
+            # left
+            grid[row][col - 1] if col > 0 else 0,
+            # right
+            grid[row][col + 1] if col < cols - 1 else 0,
+            # bottom-left
+            grid[row + 1][col - 1] if row < rows - 1 and col > 0 else 0,
+            # below
+            grid[row + 1][col] if row < rows - 1 else 0,
+            # bottom-right
+            grid[row + 1][col + 1] if row < rows - 1 and col < cols - 1 else 0,
+        ])
+        cur_alive = grid[row][col]
+        if cur_alive:
+            return (live_neighbors_cnt >= 2 and live_neighbors_cnt <= 3)
+        else:
+            return live_neighbors_cnt == 3
 
     for g in range(gen):
-        for r in range(rows):
-            for c in range(cols):
-                grid[r][c] = apply_rules(r, c)
+        grid = [[apply_rules(r, c) for c in range(cols)] for r in range(rows)]
+    return grid
 
 
 def generate_grid(rows, cols):
-    return [[bool(random.getrandbits(1)) for _ in range(cols)]
-            for _ in range(rows)]
+    return [[random.getrandbits(1) for _ in range(cols)] for _ in range(rows)]
 
 
 def test(grid, gen):
     print("initial state:")
     print_grid(grid)
+
+    result = game_of_life(grid, gen)
+
     print(f"final state after {gen} generation(s)")
-    print_grid(grid)
+    print_grid(result)
 
 
-grid = generate_grid(5, 5)
+# grid = generate_grid(5, 5)
+grid = [[0, 1, 0], [0, 0, 1], [1, 1, 1], [0, 0, 0]]
 test(grid, 1)
 
