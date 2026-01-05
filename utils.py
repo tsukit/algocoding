@@ -4,3 +4,5 @@ def print_grid(grid, *, width=5, indent="\t"):
     for line in lines:
         print(f"{indent}{line}")
 
+def test_it():
+    pass
